@@ -1,0 +1,22 @@
+{
+  "name": "fish",
+  "version": "0.0.0",
+  "description": "emit value for particular key",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/michaelnisi/fish.git"
+  },
+  "keywords": [
+    "stream",
+    "filter"
+  ],
+  "author": "Michael Nisi",
+  "license": "MIT"
+}
