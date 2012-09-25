@@ -4,7 +4,7 @@ var test = require('tap').test
   , fstream = require('fstream')
   , join = require('path').join
 
-test('fish', function (t) {
+test('objects', function (t) {
   var objs = [
     { name: 'Moe' }
   , { name: 'Larry' }
@@ -33,9 +33,7 @@ test('fstream', function (t) {
   reader
     .pipe(fish('path'))
     .pipe(es.writeArray(function (err, lines) {
-      t.same(lines, paths, 'should equal paths')   
+      t.deepEquals(lines, paths, 'should be paths')   
       t.end()
     }))
 })
-
-
