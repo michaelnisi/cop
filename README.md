@@ -1,5 +1,7 @@
 # fish - emit value for particular key
 
+[![Build Status](https://secure.travis-ci.org/michaelnisi/blake.png)](http://travis-ci.org/michaelnisi/fish)
+
 ## Description
 
 The fish node module emits the value of particular key if its defined on the object written to the stream.
