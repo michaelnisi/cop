@@ -10,7 +10,6 @@ function fish (key) {
   stream.readable = true
   stream.writable = true
 
-
   stream.write = function (obj) {
     if (!obj) return
     var value = obj[key]
