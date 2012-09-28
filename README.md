@@ -4,7 +4,7 @@
 
 ## Description
 
-The cop node module emits the values for particular key if its defined on the object written to the stream.
+The node module cop emits a property if it matches the specified key.
 
 ## Usage
 
