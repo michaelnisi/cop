@@ -17,7 +17,6 @@ The fish node module emits the value of particular key if its defined on the obj
       console.log(lines)
     }))
 
-
 `fish` returns a readable `Stream` that emits following events:
 
 ### Event:'error'
