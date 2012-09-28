@@ -1,23 +1,23 @@
-# fish - emit value for particular key
+# cop - emit value for particular key
 
-[![Build Status](https://secure.travis-ci.org/michaelnisi/fish.png)](http://travis-ci.org/michaelnisi/fish)
+[![Build Status](https://secure.travis-ci.org/michaelnisi/cop.png)](http://travis-ci.org/michaelnisi/cop)
 
 ## Description
 
-The fish node module emits the value of particular key if its defined on the object written to the stream.
+The cop node module emits the values for particular key if its defined on the object written to the stream.
 
 ## Usage
 
-    var fish = require('fish')
+    var cop = require('cop')
       , es = require('event-stream')
       , fstream = require('fstream')
       , reader = fstream.Reader({ path:process.cwd() })
 
-    reader.pipe(fish('path')).pipe(es.writeArray(function (err, lines) {
+    reader.pipe(cop('path')).pipe(es.writeArray(function (err, lines) {
       console.log(lines)
     }))
 
-`fish` returns a readable `Stream` that emits following events:
+`cop` returns a readable `Stream` that emits following events:
 
 ### Event:'error'
 
@@ -35,14 +35,14 @@ Emitted when the stream ended.
 
     function (data) {}
 
-The 'data' event emits the value of the passed to `fish`. 
+The 'data' event emits the value of the property matching the key passed to `cop`. 
 
 ## Installation
 
 Install with [npm](http://npmjs.org/):
 
-    npm install fish
+    npm install cop
 
 ## License
 
-[MIT License](https://raw.github.com/michaelnisi/fish/master/LICENSE)
+[MIT License](https://raw.github.com/michaelnisi/cop/master/LICENSE)

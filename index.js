@@ -1,10 +1,10 @@
-// fish - emit value for particular key
+// cop - emit value for particular key
 
-module.exports = fish
+module.exports = cop
 
 var Stream = require('stream').Stream
 
-function fish (key) {
+function cop (key) {
   var stream = new Stream()
 
   stream.readable = true

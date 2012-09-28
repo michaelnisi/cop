@@ -1,5 +1,5 @@
 {
-  "name": "fish",
+  "name": "cop",
   "version": "0.0.0",
   "description": "emit value for particular key",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/michaelnisi/fish.git"
+    "url": "git://github.com/michaelnisi/cop.git"
   },
   "devDependencies": {
     "tap": ">=0.3.1",
