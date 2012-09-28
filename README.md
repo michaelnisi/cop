@@ -1,6 +1,6 @@
 # fish - emit value for particular key
 
-[![Build Status](https://secure.travis-ci.org/michaelnisi/blake.png)](http://travis-ci.org/michaelnisi/fish)
+[![Build Status](https://secure.travis-ci.org/michaelnisi/fish.png)](http://travis-ci.org/michaelnisi/fish)
 
 ## Description
 
