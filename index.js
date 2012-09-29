@@ -3,16 +3,21 @@
 module.exports = cop
 
 var Stream = require('stream').Stream
+  , key = require('./lib/key.js')
 
-function cop (key) {
+function cop () {
+  var args = Array.prototype.slice.call(arguments)
+    , first = args[0]
+    , isFunction = typeof first === 'function'
+    , fun = isFunction ? args.shift() : key
+
   var stream = new Stream()
 
   stream.readable = true
   stream.writable = true
 
   stream.write = function (obj) {
-    if (!obj) return
-    var value = obj[key]
+    var value = fun.apply(null, [obj].concat(args))
     if (value) stream.emit('data', value)
   }
   
