@@ -4,9 +4,11 @@
 
 ## Description
 
-The node module cop emits a property if it matches the specified key.
+The node module cop emits values of properties that match the specified key passed to cop.
 
 ## Usage
+
+### Property key (default)
 
     var cop = require('cop')
       , es = require('event-stream')
@@ -16,6 +18,18 @@ The node module cop emits a property if it matches the specified key.
     reader.pipe(cop('path')).pipe(es.writeArray(function (err, lines) {
       console.log(lines)
     }))
+
+### Filter function
+
+    var cop = require('cop')
+      , fstream = require('fstream')
+      , reader = fstream.Reader({ path:process.cwd() })
+
+    reader.pipe(cop(filter)).pipe(process.stdout)
+
+    function filter (obj) {
+      return obj ? obj['path'] + '\n' : undefined
+    }
 
 `cop` returns a readable `Stream` that emits following events:
 

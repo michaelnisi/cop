@@ -28,7 +28,7 @@ test('objects', function (t) {
 test('fstream', function (t) {
   var path = process.cwd()
     , reader = fstream.Reader({ path:path })
-    , paths = [join(path, 'cop.js')]
+    , paths = [join(path, 'cop.js'), join(path, 'key.js')]
 
   reader
     .pipe(cop('path'))
