@@ -19,6 +19,7 @@ function cop () {
   stream.write = function (obj) {
     var value = fun.apply(null, [obj].concat(args))
     if (value) stream.emit('data', value)
+    return true
   }
   
   // fstream
