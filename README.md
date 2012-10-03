@@ -4,7 +4,7 @@
 
 ## Description
 
-The node module cop emits values of properties that match the specified key passed to cop.
+The node module cop is a Stream that emits specific properties of objects written to it. With filter function, it is utilizable to filter streams. 
 
 ## Usage
 
@@ -31,7 +31,7 @@ The node module cop emits values of properties that match the specified key pass
       return obj ? obj['path'] + '\n' : undefined
     }
 
-`cop` returns a readable `Stream` that emits following events:
+The `cop` function returns a readable [Stream](http://nodejs.org/api/stream.html) that emits following events:
 
 ### Event:'error'
 
@@ -49,7 +49,7 @@ Emitted when the stream ended.
 
     function (data) {}
 
-The 'data' event emits the value of the property matching the key passed to `cop`. 
+The 'data' event emits the value of the property matching the key passed to `cop` or the value returned by the filter function. 
 
 ## Installation
 
