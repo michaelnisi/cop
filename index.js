@@ -23,7 +23,14 @@ function cop () {
   }
   
   // fstream
-  stream.add = stream.write
+  stream.add = function (entry) {
+    if (entry.type === 'File') {
+      return stream.write(entry)
+    } else {
+      entry.on('entry', stream.write)
+      return true
+    }
+  }
 
   stream.end = function () {
     stream.emit('end')
