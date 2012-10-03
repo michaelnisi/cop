@@ -1,10 +1,10 @@
-# cop - emit value for particular key
+# cop - filter stream
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/cop.png)](http://travis-ci.org/michaelnisi/cop)
 
 ## Description
 
-The node module cop is a Stream that emits specific properties of objects written to it. With filter function, it is utilizable to filter streams. 
+The node module cop is a [Stream](http://nodejs.org/api/stream.html) that emits specific properties of objects written to it; with a filter function, it is utilizable to filter streams. 
 
 ## Usage
 
@@ -31,7 +31,7 @@ The node module cop is a Stream that emits specific properties of objects writte
       return obj ? obj['path'] + '\n' : undefined
     }
 
-The `cop` function returns a readable [Stream](http://nodejs.org/api/stream.html) that emits following events:
+The `cop` function returns a readable and writable [Stream](http://nodejs.org/api/stream.html) that emits following events:
 
 ### Event:'error'
 
