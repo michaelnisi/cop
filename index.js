@@ -27,7 +27,7 @@ function cop () {
     if (entry.type === 'File') {
       return stream.write(entry)
     } else {
-      entry.on('entry', stream.write)
+      entry.on('entry', stream.add)
       return true
     }
   }
