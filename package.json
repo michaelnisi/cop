@@ -1,7 +1,7 @@
 {
   "name": "cop",
-  "version": "0.0.1",
-  "description": "emit value for particular key",
+  "version": "0.1.0",
+  "description": "Filter stream",
   "main": "index.js",
   "directories": {
     "test": "test",
@@ -23,6 +23,10 @@
     "stream",
     "filter"
   ],
-  "author": "Michael Nisi",
+  "author": {
+    "name": "Michael Nisi",
+    "email": "michael.nisi@gmail.com",
+    "url": "http://michaelnisi.com"
+  },
   "license": "MIT"
 }
