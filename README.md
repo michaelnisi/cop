@@ -4,11 +4,11 @@
 
 ## Description
 
-The cop module is a [through](https://github.com/dominictarr/through) stream that can be configured to emit specific properties of objects written to it. Furthermore, if provided with a filter function, it can be used to modulate data. 
+A [through](https://github.com/dominictarr/through) stream, configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, applyable to modulate data. 
 
 ## Usage
 
-### Property key (default)
+### Property key
 
     var cop = require('cop')
       , es = require('event-stream')
