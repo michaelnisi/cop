@@ -15,7 +15,6 @@ test('primitives', function (t) {
 
 test('key', function (t) {
   var name = 'Curly'
-  
   t.equals(key({ name:name }, 'name'), name, 'should be ' + name)
   t.equals(key({ name:name }, 'id'), undefined, 'should be undefined')
   t.end()
