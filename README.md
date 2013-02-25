@@ -4,7 +4,7 @@
 
 ## Description
 
-The node module cop is a [Stream](http://nodejs.org/api/stream.html) that emits specific properties of objects written to it; with a filter function, it is utilizable to filter streams. 
+The cop module is a [through](https://github.com/dominictarr/through) stream that can be configured to emit specific properties of objects written to it. Furthermore, if provided with a filter function, it can be used to modulate data. 
 
 ## Usage
 
@@ -15,8 +15,8 @@ The node module cop is a [Stream](http://nodejs.org/api/stream.html) that emits 
       , fstream = require('fstream')
       , reader = fstream.Reader({ path:process.cwd() })
 
-    reader.pipe(cop('path')).pipe(es.writeArray(function (err, lines) {
-      console.log(lines)
+    reader.pipe(cop('path')).pipe(es.writeArray(function (err, paths) {
+      console.log(paths)
     }))
 
 ### Filter function
@@ -31,25 +31,19 @@ The node module cop is a [Stream](http://nodejs.org/api/stream.html) that emits 
       return obj ? obj['path'] + '\n' : undefined
     }
 
-The `cop` function returns a readable and writable [Stream](http://nodejs.org/api/stream.html) that emits following events:
+## Signature
 
-### Event:'error'
+### cop(key)
 
-    function (err) {}
+Provided a key, cop will emit the value of this key an object written to it. If the object has no matching property nothing will be emitted.
 
-Emitted if an error occured.
+### cop(filter)
 
-### Event:'end'
+Alternatively a filter function can be provided, which is executed before data is emitted, hence, provides an opportunity to massage the data. 
 
-    function () {}
+## Events
 
-Emitted when the stream ended.
-
-### Event:'data'
-
-    function (data) {}
-
-The 'data' event emits the value of the property matching the key passed to `cop` or the value returned by the filter function. 
+See [Stream](http://nodejs.org/api/stream.html)
 
 ## Installation
 
