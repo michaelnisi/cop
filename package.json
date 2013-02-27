@@ -1,6 +1,6 @@
 {
   "name": "cop",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Filter stream",
   "main": "index.js",
   "directories": {

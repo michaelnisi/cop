@@ -1,3 +1,4 @@
+
 // cop - filter stream
 
 var through = require('through')
@@ -14,7 +15,6 @@ module.exports = function () {
     if (value) stream.emit('data', value)
     return true
   })
-
   
   // to use with fstream
   stream.add = function (entry) {

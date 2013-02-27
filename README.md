@@ -4,7 +4,7 @@
 
 ## Description
 
-A [through](https://github.com/dominictarr/through) stream, configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, applyable to modulate data. 
+A [through](https://github.com/dominictarr/through) `Stream`, configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to modulate data. 
 
 ## Usage
 
@@ -35,7 +35,7 @@ A [through](https://github.com/dominictarr/through) stream, configurable to emit
 
 ### cop(key)
 
-Provided a key, cop will emit the value of this key an object written to it. If the object has no matching property nothing will be emitted.
+Provided a key, `cop` will emit the matching property of an object written to it. If the object has no matching property nothing is emitted.
 
 ### cop(filter)
 
