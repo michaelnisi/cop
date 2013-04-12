@@ -9,7 +9,7 @@ test('objects', function (t) {
     { name: 'Moe' }
   , { name: 'Larry' }
   , { name: 'Curly' }
-  , { id: '123' } 
+  , { id: '123' }
   , null
   , undefined
   ]
@@ -20,7 +20,7 @@ test('objects', function (t) {
     .pipe(cop('name'))
     .pipe(es.writeArray(function (err, lines) {
       t.equals(3, lines.length)
-      t.deepEquals(lines, expected, 'should be array of names')      
+      t.deepEquals(lines, expected, 'should be array of names')
       t.end()
     }))
 })
@@ -30,10 +30,17 @@ test('fstream', function (t) {
     , reader = fstream.Reader({ path:path })
     , paths = [join(path, 'cop.js'), join(path, 'key.js')]
 
+  function alphabetically (a, b) {
+    return a.localeCompare(b)
+  }
+
   reader
     .pipe(cop('path'))
     .pipe(es.writeArray(function (err, lines) {
-      t.deepEquals(lines, paths, 'should be paths')   
+      paths.sort(alphabetically)
+      lines.sort(alphabetically)
+
+      t.deepEquals(lines, paths, 'should be paths')
       t.end()
     }))
 })
@@ -41,11 +48,11 @@ test('fstream', function (t) {
 test('filter', function (t) {
   var objs = [{ name:'moe' }, { name:'larry' }, { name:'curly' }]
     , expected = ['MOE', 'LARRY', 'CURLY']
-   
+
   var filter = function (obj) {
     return obj ? obj['name'].toUpperCase() : undefined
   }
-  
+
   es.readArray(objs)
     .pipe(cop(filter))
     .pipe(es.writeArray(function (err, lines) {
