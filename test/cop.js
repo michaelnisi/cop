@@ -1,6 +1,8 @@
 var test = require('tap').test
-  , es = require('event-stream')
-  , cop = require('../index.js')
+  , cop = require('../')
+  , stream = require('stream')
+  , Readable = stream.Readable
+  , Writable = stream.Writable
   , fstream = require('fstream')
   , join = require('path').join
 
@@ -15,16 +17,43 @@ test('objects', function (t) {
   ]
 
   var expected = ['Moe', 'Larry', 'Curly']
+    , actual = []
+    , reader = new Readable({ objectMode:true })
+    , writer = new Writable({ objectMode:true })
+    , filter = cop('name')
 
-  es.readArray(objs)
-    .pipe(cop('name'))
-    .pipe(es.writeArray(function (err, lines) {
-      t.equals(3, lines.length)
-      t.deepEquals(lines, expected, 'should be array of names')
+  objs.forEach(function (obj) {
+    reader.push(obj)
+  })
+
+  reader._read = function () {
+    source.readStart()
+  }
+
+  reader.ondata = function(chunk) {
+    if (!stream.push(chunk)) source.readStop()
+  }
+
+  reader.onend = function() {
+    stream.push(null);
+  }
+
+  writer._write = function (obj, enc, cb) {
+    actual.push(obj)
+    cb()
+  }
+
+  reader
+    .pipe(filter)
+    .pipe(writer)
+    .on('finish', function () {
+      t.equals(3, actual.length)
+      t.deepEquals(actual, expected, 'should be array of names')
       t.end()
-    }))
+    })
 })
 
+/*
 test('fstream', function (t) {
   var path = process.cwd()
     , reader = fstream.Reader({ path:path })
@@ -60,4 +89,4 @@ test('filter', function (t) {
       t.deepEquals(lines, expected, 'should be array of uppercase names')
       t.end()
     }))
-})
+})*/
