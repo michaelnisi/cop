@@ -1,6 +1,6 @@
 {
   "name": "cop",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Filter stream",
   "main": "index.js",
   "directories": {
@@ -14,12 +14,8 @@
     "type": "git",
     "url": "git://github.com/michaelnisi/cop.git"
   },
-  "dependencies": {
-    "through": "2.2.x"
-  },
   "devDependencies": {
     "tap": "0.4.x",
-    "event-stream": "3.0.x",
     "fstream": "0.1.x"
   },
   "keywords": [
