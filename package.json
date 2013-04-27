@@ -1,7 +1,7 @@
 {
   "name": "cop",
-  "version": "0.2.5",
-  "description": "Filter stream",
+  "version": "0.3.0",
+  "description": "Filter stream of objects",
   "main": "index.js",
   "directories": {
     "test": "test",
@@ -14,17 +14,18 @@
     "type": "git",
     "url": "git://github.com/michaelnisi/cop.git"
   },
-  "dependencies": {
-    "through": "2.2.x"
-  },
   "devDependencies": {
     "tap": "0.4.x",
-    "event-stream": "3.0.x",
     "fstream": "0.1.x"
   },
+  "engines": { 
+    "node": "0.10.x" 
+  },
   "keywords": [
+    "filter",
+    "object",
     "stream",
-    "filter"
+    "streams2"
   ],
   "author": {
     "name": "Michael Nisi",

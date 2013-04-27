@@ -1,25 +1,26 @@
 
-// cop - filter stream
+// cop - filter stream of objects
 
-var through = require('through')
+var Transform = require('stream').Transform
   , key = require('./lib/key.js')
-  
+
 module.exports = function () {
   var args = Array.prototype.slice.call(arguments)
     , first = args[0]
-    , isFunction = typeof first === 'function'
-    , fun = isFunction ? args.shift() : key
+    , fun = typeof first === 'function' ? first : key
 
-  var stream = through(function write (data) {
-    var value = fun.apply(null, [data].concat(args))
-    if (value) stream.emit('data', value)
-    return true
-  })
-  
-  // to use with fstream
+  var stream = new Transform({ objectMode:true })
+
+  stream._transform = function write (obj, enc, callback) {
+    var value = fun.apply(null, [obj].concat(args))
+    if (value) stream.push(value)
+    if (callback) callback()
+  }
+
+  // to pipe from fstream
   stream.add = function (entry) {
     if (entry.type === 'File') {
-      return stream.write(entry)
+      return stream._transform(entry)
     } else {
       entry.on('entry', stream.add)
       return true

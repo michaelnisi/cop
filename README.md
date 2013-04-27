@@ -1,10 +1,10 @@
-# cop - filter stream
+# cop - filter stream of objects
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/cop.png)](http://travis-ci.org/michaelnisi/cop)
 
 ## Description
 
-A [through](https://github.com/dominictarr/through) `Stream`, configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to modulate data. 
+A [Transform](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) `Stream` configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to modulate data. 
 
 ## Usage
 
