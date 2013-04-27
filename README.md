@@ -4,7 +4,7 @@
 
 ## Description
 
-A [Transform](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) `Stream` configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to modulate data. 
+The cop [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream which is configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to massage data. 
 
 ## Usage
 
@@ -37,7 +37,9 @@ A [Transform](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_
       , fstream = require('fstream')
       , reader = fstream.Reader({ path:process.cwd() })
 
-    reader.pipe(cop(filter)).pipe(process.stdout)
+    reader
+      .pipe(cop(filter))
+      .pipe(process.stdout)
 
     function filter (obj) {
       return obj ? obj['path'] + '\n' : undefined
