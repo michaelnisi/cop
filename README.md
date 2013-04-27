@@ -24,7 +24,7 @@ A [Transform](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_
       , i = 0
 
     reader._read = function () {
-      reader.push(i < length ?  objs[i++] : null)
+      reader.push(i < length ? objs[i++] : null)
     }
 
     reader

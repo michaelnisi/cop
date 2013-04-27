@@ -20,7 +20,7 @@ test('filter', function (t) {
     , i = 0
 
   reader._read = function () {
-    reader.push(i < objs.length ?  objs[i++] : null)
+    reader.push(i < objs.length ? objs[i++] : null)
   }
 
   writer._write = function (chunk, enc, callback) {
@@ -59,7 +59,7 @@ test('types', function (t) {
     , i = 0
 
   reader._read = function () {
-    reader.push(i < objs.length ?  objs[i++] : null)
+    reader.push(i < objs.length ? objs[i++] : null)
   }
 
   writer._write = function (chunk, enc, callback) {
@@ -90,7 +90,7 @@ test('transform', function (t) {
     , i = 0
 
   reader._read = function () {
-    reader.push(i < objs.length ?  objs[i++] : null)
+    reader.push(i < objs.length ? objs[i++] : null)
   }
 
   writer._write = function (obj, enc, cb) {

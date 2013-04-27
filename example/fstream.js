@@ -1,3 +1,6 @@
+
+// fstream - pipe recursive paths
+
 var cop = require('cop')
   , fstream = require('fstream')
   , reader = fstream.Reader({ path:process.cwd() })

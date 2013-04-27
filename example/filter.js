@@ -15,7 +15,7 @@ var reader = new Readable({ objectMode:true })
   , i = 0
 
 reader._read = function () {
-  reader.push(i < length ?  objs[i++] : null)
+  reader.push(i < length ? objs[i++] : null)
 }
 
 reader
