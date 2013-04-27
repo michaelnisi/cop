@@ -8,19 +8,31 @@ A [Transform](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_
 
 ## Usage
 
-### Property key
-
+### Property value by name
+    
     var cop = require('cop')
-      , es = require('event-stream')
-      , fstream = require('fstream')
-      , reader = fstream.Reader({ path:process.cwd() })
+      , Readable = require('stream').Readable
 
-    reader.pipe(cop('path')).pipe(es.writeArray(function (err, paths) {
-      console.log(paths)
-    }))
+    var objs = [
+      { thing: 'My hovercraft ' }
+    , { thing: 'is full ' }
+    , { thing: 'of eels.\n' }
+    ]
+
+    var reader = new Readable({ objectMode:true })
+      , length = objs.length
+      , i = 0
+
+    reader._read = function () {
+      reader.push(i < length ?  objs[i++] : null)
+    }
+
+    reader
+      .pipe(cop('thing'))
+      .pipe(process.stdout)
 
 ### Filter function
-
+    
     var cop = require('cop')
       , fstream = require('fstream')
       , reader = fstream.Reader({ path:process.cwd() })

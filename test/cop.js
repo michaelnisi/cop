@@ -8,6 +8,38 @@ var test = require('tap').test
 
 test('filter', function (t) {
   var objs = [
+    { name: 'Moe' }
+  , { name: 'Larry' }
+  , { name: 'Curly' }
+  ]
+
+  var expected = ['Moe', 'Larry', 'Curly']
+    , actual = []
+    , reader = new Readable({ objectMode:true })
+    , writer = new Writable({ objectMode:true })
+    , i = 0
+
+  reader._read = function () {
+    reader.push(i < objs.length ?  objs[i++] : null)
+  }
+
+  writer._write = function (chunk, enc, callback) {
+    actual.push(chunk)
+    callback()
+  }
+
+  reader
+    .pipe(cop('name'))
+    .pipe(writer)
+    .on('finish', function (err, lines) {
+      t.equals(3, actual.length)
+      t.deepEquals(actual, expected, 'should be array of names')
+      t.end()
+    })
+})
+
+test('types', function (t) {
+  var objs = [
     { thing: 'Moe' }
   , { thing: 1 }
   , { thing: -1 }
@@ -40,7 +72,7 @@ test('filter', function (t) {
     .pipe(writer)
     .on('finish', function (err, lines) {
       t.equals(7, actual.length)
-      t.deepEquals(actual, expected, 'should be array of names')
+      t.deepEquals(actual, expected, 'should be expected values')
       t.end()
     })
 })
