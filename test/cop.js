@@ -8,15 +8,19 @@ var test = require('tap').test
 
 test('filter', function (t) {
   var objs = [
-    { name: 'Moe' }
-  , { name: 'Larry' }
-  , { name: 'Curly' }
-  , { id: '123' }
+    { thing: 'Moe' }
+  , { thing: 1 }
+  , { thing: -1 }
+  , { thing: true }
+  , { thing: false }
+  , { thing: null }
+  , { thing: {} }
+  , { thing: [] }
   , null
   , undefined
   ]
 
-  var expected = ['Moe', 'Larry', 'Curly']
+  var expected = ['Moe', 1, -1, true, false, /* null */ {}, []]
     , actual = []
     , reader = new Readable({ objectMode:true })
     , writer = new Writable({ objectMode:true })
@@ -32,10 +36,10 @@ test('filter', function (t) {
   }
 
   reader
-    .pipe(cop('name'))
+    .pipe(cop('thing'))
     .pipe(writer)
     .on('finish', function (err, lines) {
-      t.equals(3, actual.length)
+      t.equals(7, actual.length)
       t.deepEquals(actual, expected, 'should be array of names')
       t.end()
     })

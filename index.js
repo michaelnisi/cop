@@ -13,7 +13,7 @@ module.exports = function () {
 
   stream._transform = function write (obj, enc, callback) {
     var value = fun.apply(null, [obj].concat(args))
-    if (value) stream.push(value)
+    if (value !== undefined) stream.push(value)
     if (callback) callback()
   }
 
