@@ -6,7 +6,7 @@ var test = require('tap').test
   , Readable = stream.Readable
   , Writable = stream.Writable
 
-test('property filter', function (t) {
+test('filter', function (t) {
   var objs = [
     { name: 'Moe' }
   , { name: 'Larry' }
@@ -41,34 +41,7 @@ test('property filter', function (t) {
     })
 })
 
-test('fstream', function (t) {
-  var path = process.cwd()
-    , paths = [join(path, 'cop.js'), join(path, 'key.js')]
-    , actual = []
-    , reader = fstream.Reader({ path:path })
-    , writer = new Writable({ objectMode:true })
-
-  writer._write = function (obj, enc, cb) {
-    actual.push(obj)
-    cb()
-  }
-
-  function alphabetically (a, b) {
-    return a.localeCompare(b)
-  }
-
-  reader
-    .pipe(cop('path'))
-    .pipe(writer)
-    .on('finish', function () {
-      paths.sort(alphabetically)
-      actual.sort(alphabetically)
-      t.deepEquals(actual, paths, 'should be paths')
-      t.end()
-    })
-})
-
-test('filter', function (t) {
+test('transform', function (t) {
   var objs = [
     { name:'moe' }
   , { name:'larry' }
@@ -99,6 +72,33 @@ test('filter', function (t) {
     .on('finish', function () {
       t.equals(3, actual.length)
       t.deepEquals(actual, expected, 'should be array of uppercase names')
+      t.end()
+    })
+})
+
+test('fstream', function (t) {
+  var path = process.cwd()
+    , paths = [join(path, 'cop.js'), join(path, 'key.js')]
+    , actual = []
+    , reader = fstream.Reader({ path:path })
+    , writer = new Writable({ objectMode:true })
+
+  writer._write = function (obj, enc, cb) {
+    actual.push(obj)
+    cb()
+  }
+
+  function alphabetically (a, b) {
+    return a.localeCompare(b)
+  }
+
+  reader
+    .pipe(cop('path'))
+    .pipe(writer)
+    .on('finish', function () {
+      paths.sort(alphabetically)
+      actual.sort(alphabetically)
+      t.deepEquals(actual, paths, 'should be paths')
       t.end()
     })
 })
