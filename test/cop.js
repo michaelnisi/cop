@@ -16,10 +16,9 @@ test('filter', function (t) {
     , actual = []
     , reader = new Readable({ objectMode:true })
     , writer = new Writable({ objectMode:true })
-    , i = 0
 
   reader._read = function () {
-    reader.push(i < objs.length ? objs[i++] : null)
+    reader.push(objs.shift())
   }
 
   writer._write = function (chunk, enc, callback) {
