@@ -11,20 +11,20 @@ module.exports = function () {
 
   var stream = new Transform({ objectMode:true })
 
-  stream._transform = function write (obj, enc, callback) {
+  stream._transform = function write (obj, enc, cb) {
     var value = fun.apply(null, [obj].concat(args))
-    if (value !== undefined) stream.push(value)
-    if (callback) callback()
+    if (value !== undefined && value !== null) stream.push(value)
+    if (cb) cb()
   }
 
   // to pipe from fstream
   stream.add = function (entry) {
     if (entry.type === 'File') {
-      return stream._transform(entry)
+      stream._transform(entry)
     } else {
       entry.on('entry', stream.add)
-      return true
     }
+    return true
   }
 
   return stream

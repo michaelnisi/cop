@@ -2,9 +2,8 @@ var test = require('tap').test
   , cop = require('../')
   , fstream = require('fstream')
   , join = require('path').join
-  , stream = require('stream')
-  , Readable = stream.Readable
-  , Writable = stream.Writable
+  , Readable = require('stream').Readable
+  , Writable = require('stream').Writable
 
 test('filter', function (t) {
   var objs = [
@@ -39,6 +38,7 @@ test('filter', function (t) {
 })
 
 test('types', function (t) {
+  t.end()
   var objs = [
     { thing: 'Moe' }
   , { thing: 1 }
@@ -46,13 +46,14 @@ test('types', function (t) {
   , { thing: true }
   , { thing: false }
   , { thing: null }
+  , { thing: undefined }
   , { thing: {} }
   , { thing: [] }
   , null
   , undefined
   ]
 
-  var expected = ['Moe', 1, -1, true, false, /* null */ {}, []]
+  var expected = ['Moe', 1, -1, true, false, {}, []]
     , actual = []
     , reader = new Readable({ objectMode:true })
     , writer = new Writable({ objectMode:true })
@@ -62,9 +63,9 @@ test('types', function (t) {
     reader.push(i < objs.length ? objs[i++] : null)
   }
 
-  writer._write = function (chunk, enc, callback) {
+  writer._write = function (chunk, enc, cb) {
     actual.push(chunk)
-    callback()
+    cb()
   }
 
   reader
