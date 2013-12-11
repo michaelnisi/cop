@@ -43,6 +43,8 @@ function filter (obj) {
   return obj ? obj['path'] + '\n' : undefined
 }
 ```
+## API
+
 ### cop(key)
 
 - `key` Name of the property of which to emit the value
