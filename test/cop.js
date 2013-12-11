@@ -114,7 +114,7 @@ test('transform', function (t) {
 
 test('fstream', function (t) {
   var path = process.cwd()
-    , paths = [join(path, 'cop.js'), join(path, 'key.js')]
+    , paths = [join(path, 'cop.js')]
     , actual = []
     , reader = fstream.Reader({ path:path })
     , writer = new Writable({ objectMode:true })
