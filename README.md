@@ -2,8 +2,6 @@
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/cop.png)](http://travis-ci.org/michaelnisi/cop) [![David DM](https://david-dm.org/michaelnisi/cop.png)](http://david-dm.org/michaelnisi/cop)
 
-## Description
-
 The cop [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream (in object mode) which is configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to massage data. 
 
 ## Usage
@@ -45,13 +43,13 @@ function filter (obj) {
   return obj ? obj['path'] + '\n' : undefined
 }
 ```
-## cop(key)
+### cop(key)
 
 - `key` Name of the property of which to emit the value
 
 Provided a key, `cop` will emit the matching property of an object written to it. If the object has no matching property nothing is emitted.
 
-## cop(filter)
+### cop(filter)
 
 - `filter` Filter function which is applied to each object written to the stream 
 
