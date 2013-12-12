@@ -1,8 +1,8 @@
-# cop - filter stream of objects
-
-[![Build Status](https://secure.travis-ci.org/michaelnisi/cop.png)](http://travis-ci.org/michaelnisi/cop) [![David DM](https://david-dm.org/michaelnisi/cop.png)](http://david-dm.org/michaelnisi/cop)
+# cop - filter object stream
 
 The cop [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream (in object mode) which is configurable to emit specific properties of objects written to it. Furthermore, if provided with a filter function, `cop` can be used to massage data. 
+
+[![Build Status](https://secure.travis-ci.org/michaelnisi/cop.png)](http://travis-ci.org/michaelnisi/cop) [![David DM](https://david-dm.org/michaelnisi/cop.png)](http://david-dm.org/michaelnisi/cop)
 
 ## Usage
 
