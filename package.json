@@ -1,14 +1,14 @@
 {
   "name": "cop",
-  "version": "0.3.5",
-  "description": "Filter stream of objects",
+  "version": "0.3.6",
+  "description": "Filter object streams",
   "main": "index.js",
   "directories": {
     "test": "test",
     "example": "example"
   },
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap --tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,7 @@
     "fstream": "0.1.x"
   },
   "engines": { 
-    "node": "0.10.x" 
-  , "node": "0.11.x" 
+    "node": ">=0.10" 
   },
   "keywords": [
     "filter",
