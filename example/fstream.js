@@ -1,12 +1,13 @@
 
 // fstream - pipe recursive paths
 
-var cop = require('cop')
-  , fstream = require('fstream')
-  , reader = fstream.Reader({ path:process.cwd() })
+var cop = require('../')
+var fstream = require('fstream')
 
-reader.pipe(cop(filter)).pipe(process.stdout)
+var reader = fstream.Reader({ path: __dirname })
 
 function filter (obj) {
   return obj ? obj['path'] + '\n' : undefined
 }
+
+reader.pipe(cop(filter)).pipe(process.stdout)

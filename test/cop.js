@@ -1,100 +1,95 @@
+var cop = require('../')
+var fstream = require('fstream')
+var path = require('path')
+var stream = require('readable-stream')
 var test = require('tap').test
-  , cop = require('../')
-  , fstream = require('fstream')
-  , join = require('path').join
-  , Readable = require('stream').Readable
-  , Writable = require('stream').Writable
 
 test('filter', function (t) {
   var objs = [
-    { name: 'Moe' }
-  , { name: 'Larry' }
-  , { name: 'Curly' }
+    { name: 'Moe' },
+    { name: 'Larry' },
+    { name: 'Curly' }
   ]
 
-  var expected = ['Moe', 'Larry', 'Curly']
-    , actual = []
-    , reader = new Readable({ objectMode:true })
-    , writer = new Writable({ objectMode:true })
+  var reader = new stream.Readable({ objectMode: true })
+  var writer = new stream.Writable({ objectMode: true })
 
   reader._read = function () {
-    reader.push(objs.shift())
+    reader.push(objs.shift() || null)
   }
 
-  writer._write = function (chunk, enc, callback) {
-    actual.push(chunk)
-    callback()
+  var wanted = ['Moe', 'Larry', 'Curly']
+  var found = []
+
+  writer._write = function (chunk, enc, cb) {
+    found.push(chunk)
+    cb()
   }
 
   reader
     .pipe(cop('name'))
     .pipe(writer)
-    .on('finish', function (err, lines) {
-      t.equals(3, actual.length)
-      t.deepEquals(actual, expected, 'should be array of names')
+    .on('finish', function () {
+      t.deepEquals(found, wanted, 'should be names')
       t.end()
     })
 })
 
-test('types', function (t) {
-  t.end()
+test('types', { skip: false }, function (t) {
   var objs = [
-    { thing: 'Moe' }
-  , { thing: 1 }
-  , { thing: -1 }
-  , { thing: true }
-  , { thing: false }
-  , { thing: null }
-  , { thing: undefined }
-  , { thing: {} }
-  , { thing: [] }
-  , null
-  , undefined
+    { thing: 'Moe' },
+    { thing: 1 },
+    { thing: -1 },
+    { thing: true },
+    { thing: false },
+    { thing: null },
+    { thing: undefined },
+    { thing: {} },
+    { thing: [] }
   ]
 
-  var expected = ['Moe', 1, -1, true, false, {}, []]
-    , actual = []
-    , reader = new Readable({ objectMode:true })
-    , writer = new Writable({ objectMode:true })
-    , i = 0
+  var wanted = ['Moe', 1, -1, true, false, {}, []]
+  var found = []
+  var reader = new stream.Readable({ objectMode: true })
+  var writer = new stream.Writable({ objectMode: true })
 
   reader._read = function () {
-    reader.push(i < objs.length ? objs[i++] : null)
+    reader.push(objs.shift() || null)
   }
 
   writer._write = function (chunk, enc, cb) {
-    actual.push(chunk)
+    found.push(chunk)
     cb()
   }
 
   reader
     .pipe(cop('thing'))
     .pipe(writer)
-    .on('finish', function (err, lines) {
-      t.equals(7, actual.length)
-      t.deepEquals(actual, expected, 'should be expected values')
+    .on('finish', function () {
+      t.deepEquals(found, wanted, 'should be things')
       t.end()
     })
 })
 
-test('transform', function (t) {
+test('transform', { skip: false }, function (t) {
   var objs = [
-    { name:'moe' }
-  , { name:'larry' }
-  , { name:'curly' }]
+    { name: 'moe' },
+    { name: 'larry' },
+    { name: 'curly' }
+  ]
 
-  var expected = ['MOE', 'LARRY', 'CURLY']
-    , actual = []
-    , reader = new Readable({ objectMode:true })
-    , writer = new Writable({ objectMode:true })
-    , i = 0
+  var reader = new stream.Readable({ objectMode: true })
+  var writer = new stream.Writable({ objectMode: true })
 
   reader._read = function () {
-    reader.push(i < objs.length ? objs[i++] : null)
+    reader.push(objs.shift() || null)
   }
 
+  var wanted = ['MOE', 'LARRY', 'CURLY']
+  var found = []
+
   writer._write = function (obj, enc, cb) {
-    actual.push(obj)
+    found.push(obj)
     cb()
   }
 
@@ -106,18 +101,16 @@ test('transform', function (t) {
     .pipe(cop(filter))
     .pipe(writer)
     .on('finish', function () {
-      t.equals(3, actual.length)
-      t.deepEquals(actual, expected, 'should be array of uppercase names')
+      t.deepEquals(found, wanted, 'should be uppercase names')
       t.end()
     })
 })
 
-test('fstream', function (t) {
-  var path = process.cwd()
-    , paths = [join(path, 'cop.js')]
-    , actual = []
-    , reader = fstream.Reader({ path:path })
-    , writer = new Writable({ objectMode:true })
+test('fstream', { skip: false }, function (t) {
+  var paths = [path.join(__dirname, 'cop.js')]
+  var actual = []
+  var reader = fstream.Reader({ path: __dirname })
+  var writer = new stream.Writable({ objectMode: true })
 
   writer._write = function (obj, enc, cb) {
     actual.push(obj)

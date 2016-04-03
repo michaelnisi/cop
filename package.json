@@ -1,6 +1,6 @@
 {
   "name": "cop",
-  "version": "0.3.6",
+  "version": "1.0.0",
   "description": "Filter object streams",
   "main": "index.js",
   "directories": {
@@ -8,18 +8,20 @@
     "example": "example"
   },
   "scripts": {
-    "test": "tap --tap test/*.js"
+    "pretest": "standard",
+    "test": "tap -b test/*.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/michaelnisi/cop.git"
   },
   "devDependencies": {
-    "tap": "0.4.x",
-    "fstream": "0.1.x"
+    "fstream": "^1.0.8",
+    "standard": "^6.0.8",
+    "tap": "^5.7.0"
   },
-  "engines": { 
-    "node": ">=0.10" 
+  "engines": {
+    "node": ">=0.10"
   },
   "keywords": [
     "filter",
@@ -32,5 +34,8 @@
     "email": "michael.nisi@gmail.com",
     "url": "http://michaelnisi.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "readable-stream": "^2.0.6"
+  }
 }
